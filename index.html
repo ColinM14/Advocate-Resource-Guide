@@ -32,8 +32,10 @@
             border-radius: 5px;
             cursor: pointer;
         }
-        .resource {
+        .resources-wrapper {
             display: none;
+        }
+        .resource {
             border: 1px solid #ccc;
             padding: 10px;
             margin-top: 10px;
@@ -84,7 +86,9 @@
                     const catDiv = document.createElement('div');
                     catDiv.className = 'category';
                     catDiv.textContent = cat;
-                    app.appendChild(catDiv);
+
+                    const wrapper = document.createElement('div');
+                    wrapper.className = 'resources-wrapper';
 
                     categories[cat].forEach(resource => {
                         const resDiv = document.createElement('div');
@@ -97,13 +101,15 @@
                             <p><strong>Address:</strong> ${resource.Address}</p>
                             <p>${resource.Description}</p>
                         `;
-                        app.appendChild(resDiv);
-                        catDiv.addEventListener('click', () => {
-                            const visible = resDiv.style.display === 'block';
-                            document.querySelectorAll('.resource').forEach(el => el.style.display = 'none');
-                            resDiv.style.display = visible ? 'none' : 'block';
-                        });
+                        wrapper.appendChild(resDiv);
                     });
+
+                    catDiv.addEventListener('click', () => {
+                        wrapper.style.display = wrapper.style.display === 'block' ? 'none' : 'block';
+                    });
+
+                    app.appendChild(catDiv);
+                    app.appendChild(wrapper);
                 });
             });
 
