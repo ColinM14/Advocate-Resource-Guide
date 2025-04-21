@@ -1,0 +1,127 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Senior Resource Guide</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        body {{
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #f9f9f9;
+        }}
+        header {{
+            background: #715191;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }}
+        header img {{
+            max-height: 60px;
+        }}
+        .container {{
+            padding: 20px;
+        }}
+        .category {{
+            background: #009ca7;
+            color: white;
+            padding: 10px;
+            margin-top: 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }}
+        .resource {{
+            display: none;
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin-top: 10px;
+            border-radius: 5px;
+            background: white;
+        }}
+        .resource h4 {{
+            margin: 5px 0;
+        }}
+        button.copy {{
+            background: #66b1e2;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-left: 10px;
+        }}
+        button.copy:hover {{
+            background: #009ca7;
+        }}
+    </style>
+</head>
+<body>
+    <header>
+        <img src="https://via.placeholder.com/200x60?text=Care+Logo" alt="Care Logo">
+        <h1>Senior Resource Guide</h1>
+    </header>
+    <div class="container" id="app">
+        <p>Loading resources...</p>
+    </div>
+    <script>
+        const SHEET_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTzIWjaibsqD5ikdfbm59WqXWIlROxFake7ApsGJzQzccbnZFfq8lOLfaht_2dcbCcA_1Mq3wRjsol3/pub?output=csv';
+
+        fetch(SHEET_URL)
+            .then(response => response.text())
+            .then(data => {{
+                const rows = data.split("\n").map(row => row.split(","));
+                const headers = rows[0];
+                const categories = {{}};
+                rows.slice(1).forEach(cols => {{
+                    const item = {{
+                        category: cols[0],
+                        name: cols[1],
+                        website: cols[2],
+                        phone: cols[3],
+                        description: cols[4],
+                        address: cols[5]
+                    }};
+                    if (!categories[item.category]) categories[item.category] = [];
+                    categories[item.category].push(item);
+                }});
+                
+                const app = document.getElementById('app');
+                app.innerHTML = '';
+
+                Object.keys(categories).forEach(cat => {{
+                    const catDiv = document.createElement('div');
+                    catDiv.className = 'category';
+                    catDiv.textContent = cat;
+                    app.appendChild(catDiv);
+
+                    categories[cat].forEach(resource => {{
+                        const resDiv = document.createElement('div');
+                        resDiv.className = 'resource';
+
+                        resDiv.innerHTML = `
+                            <h4>${{resource.name}}</h4>
+                            <p><strong>Phone:</strong> ${{resource.phone}} <button class='copy' onclick="copyText('${{resource.phone}}')">Copy</button></p>
+                            <p><strong>Website:</strong> <a href='${{resource.website}}' target='_blank'>${{resource.website}}</a> <button class='copy' onclick="copyText('${{resource.website}}')">Copy</button></p>
+                            <p><strong>Address:</strong> ${{resource.address}}</p>
+                            <p>${{resource.description}}</p>
+                        `;
+                        app.appendChild(resDiv);
+                        catDiv.addEventListener('click', () => {{
+                            const visible = resDiv.style.display === 'block';
+                            document.querySelectorAll('.resource').forEach(el => el.style.display = 'none');
+                            resDiv.style.display = visible ? 'none' : 'block';
+                        }});
+                    }});
+                }});
+            }});
+
+        function copyText(text) {{
+            navigator.clipboard.writeText(text).then(() => {{
+                alert("Copied: " + text);
+            }});
+        }}
+    </script>
+</body>
+</html>
