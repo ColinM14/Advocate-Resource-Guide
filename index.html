@@ -6,44 +6,44 @@
     <title>Senior Resource Guide</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <style>
-        body {{
+        body {
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
             background: #f9f9f9;
-        }}
-        header {{
+        }
+        header {
             background: #715191;
             color: white;
             padding: 20px;
             text-align: center;
-        }}
-        header img {{
+        }
+        header img {
             max-height: 60px;
-        }}
-        .container {{
+        }
+        .container {
             padding: 20px;
-        }}
-        .category {{
+        }
+        .category {
             background: #009ca7;
             color: white;
             padding: 10px;
             margin-top: 20px;
             border-radius: 5px;
             cursor: pointer;
-        }}
-        .resource {{
+        }
+        .resource {
             display: none;
             border: 1px solid #ccc;
             padding: 10px;
             margin-top: 10px;
             border-radius: 5px;
             background: white;
-        }}
-        .resource h4 {{
+        }
+        .resource h4 {
             margin: 5px 0;
-        }}
-        button.copy {{
+        }
+        button.copy {
             background: #66b1e2;
             color: white;
             border: none;
@@ -51,16 +51,16 @@
             border-radius: 4px;
             cursor: pointer;
             margin-left: 10px;
-        }}
-        button.copy:hover {{
+        }
+        button.copy:hover {
             background: #009ca7;
-        }}
+        }
     </style>
 </head>
 <body>
     <header>
         <img src="https://via.placeholder.com/200x60?text=Care+Logo" alt="Care Logo">
-        <h1>Advocate Resource Guide</h1>
+        <h1>Senior Resource Guide</h1>
     </header>
     <div class="container" id="app">
         <p>Loading resources...</p>
@@ -70,48 +70,48 @@
 
         fetch(SHEET_URL)
             .then(response => response.json())
-            .then(data => {{
-                const categories = {{}};
-                data.forEach(item => {{
+            .then(data => {
+                const categories = {};
+                data.forEach(item => {
                     if (!categories[item.Category]) categories[item.Category] = [];
                     categories[item.Category].push(item);
-                }});
+                });
 
                 const app = document.getElementById('app');
                 app.innerHTML = '';
 
-                Object.keys(categories).forEach(cat => {{
+                Object.keys(categories).forEach(cat => {
                     const catDiv = document.createElement('div');
                     catDiv.className = 'category';
                     catDiv.textContent = cat;
                     app.appendChild(catDiv);
 
-                    categories[cat].forEach(resource => {{
+                    categories[cat].forEach(resource => {
                         const resDiv = document.createElement('div');
                         resDiv.className = 'resource';
 
                         resDiv.innerHTML = `
-                            <h4>${{resource.Name}}</h4>
-                            <p><strong>Phone:</strong> ${{resource.Phone}} <button class='copy' onclick="copyText('${{resource.Phone}}')">Copy</button></p>
-                            <p><strong>Website:</strong> <a href='${{resource.Website}}' target='_blank'>${{resource.Website}}</a> <button class='copy' onclick="copyText('${{resource.Website}}')">Copy</button></p>
-                            <p><strong>Address:</strong> ${{resource.Address}}</p>
-                            <p>${{resource.Description}}</p>
+                            <h4>${resource.Name}</h4>
+                            <p><strong>Phone:</strong> ${resource.Phone} <button class='copy' onclick="copyText('${resource.Phone}')">Copy</button></p>
+                            <p><strong>Website:</strong> <a href='${resource.Website}' target='_blank'>${resource.Website}</a> <button class='copy' onclick="copyText('${resource.Website}')">Copy</button></p>
+                            <p><strong>Address:</strong> ${resource.Address}</p>
+                            <p>${resource.Description}</p>
                         `;
                         app.appendChild(resDiv);
-                        catDiv.addEventListener('click', () => {{
+                        catDiv.addEventListener('click', () => {
                             const visible = resDiv.style.display === 'block';
                             document.querySelectorAll('.resource').forEach(el => el.style.display = 'none');
                             resDiv.style.display = visible ? 'none' : 'block';
-                        }});
-                    }});
-                }});
-            }});
+                        });
+                    });
+                });
+            });
 
-        function copyText(text) {{
-            navigator.clipboard.writeText(text).then(() => {{
+        function copyText(text) {
+            navigator.clipboard.writeText(text).then(() => {
                 alert("Copied: " + text);
-            }});
-        }}
+            });
+        }
     </script>
 </body>
 </html>
