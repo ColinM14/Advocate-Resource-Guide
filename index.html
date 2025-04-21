@@ -13,7 +13,7 @@
             background: #f9f9f9;
         }
         header {
-            background: #715191;
+            background: #000000;
             color: white;
             padding: 20px;
             text-align: center;
@@ -27,13 +27,19 @@
         .container {
             padding: 20px;
         }
+        .category-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
         .category {
             background: #009ca7;
             color: white;
             padding: 10px;
-            margin-top: 20px;
             border-radius: 5px;
             cursor: pointer;
+            flex: 1 1 200px;
+            text-align: center;
         }
         .resources-wrapper {
             display: none;
@@ -93,6 +99,9 @@
                 const app = document.getElementById('app');
                 app.innerHTML = '';
 
+                const categoryGrid = document.createElement('div');
+                categoryGrid.className = 'category-grid';
+
                 Object.keys(categories).forEach(cat => {
                     const catDiv = document.createElement('div');
                     catDiv.className = 'category';
@@ -123,7 +132,8 @@
                         wrapper.style.display = wrapper.style.display === 'block' ? 'none' : 'block';
                     });
 
-                    app.appendChild(catDiv);
+                    categoryGrid.appendChild(catDiv);
+                    app.appendChild(categoryGrid);
                     app.appendChild(wrapper);
                 });
             });
