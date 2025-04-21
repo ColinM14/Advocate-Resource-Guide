@@ -19,7 +19,10 @@
             text-align: center;
         }
         header img {
-            max-height: 60px;
+            width: 3in;
+            max-width: 100%;
+            display: block;
+            margin: 0 auto;
         }
         .container {
             padding: 20px;
@@ -45,14 +48,22 @@
         .resource h4 {
             margin: 5px 0;
         }
+        .button-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 10px;
+        }
         button.copy {
+            flex: 1 1 140px;
+            max-width: 3in;
             background: #66b1e2;
             color: white;
             border: none;
-            padding: 5px 10px;
+            padding: 10px;
             border-radius: 4px;
             cursor: pointer;
-            margin-left: 10px;
+            text-align: center;
         }
         button.copy:hover {
             background: #009ca7;
@@ -61,9 +72,8 @@
 </head>
 <body>
     <header>
-<img src="https://carepatrol.com/wp-content/uploads/sites/2/2023/07/CP_CarePatrol-Logo_CMYK.svg" alt="CarePatrol Logo" style="width: 3in; max-width: 100%; display: block; margin: 0 auto;">
-<h1 style="margin-top: 10px;">Advocate Resource Guide</h1>
-
+        <img src="https://carepatrol.com/wp-content/uploads/sites/2/2023/07/CP_CarePatrol-Logo_CMYK.svg" alt="CarePatrol Logo">
+        <h1 style="margin-top: 10px;">Senior Resource Guide</h1>
     </header>
     <div class="container" id="app">
         <p>Loading resources...</p>
@@ -97,10 +107,14 @@
 
                         resDiv.innerHTML = `
                             <h4>${resource.Name}</h4>
-                            <p><strong>Phone:</strong> ${resource.Phone} <button class='copy' onclick="copyText('${resource.Phone}')">Copy</button></p>
-                            <p><strong>Website:</strong> <a href='${resource.Website}' target='_blank'>${resource.Website}</a> <button class='copy' onclick="copyText('${resource.Website}')">Copy</button></p>
+                            <p><strong>Phone:</strong> ${resource.Phone}</p>
+                            <p><strong>Website:</strong> <a href='${resource.Website}' target='_blank'>${resource.Website}</a></p>
                             <p><strong>Address:</strong> ${resource.Address}</p>
                             <p>${resource.Description}</p>
+                            <div class="button-row">
+                                <button class='copy' onclick="copyText('${resource.Phone}')">Copy Phone</button>
+                                <button class='copy' onclick="copyText('${resource.Website}')">Copy Website</button>
+                            </div>
                         `;
                         wrapper.appendChild(resDiv);
                     });
