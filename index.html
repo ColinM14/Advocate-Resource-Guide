@@ -33,14 +33,13 @@
     .container {
       padding: 20px;
     }
-    .category-grid {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-bottom: 20px;
+    .category-wrapper {
+      width: calc(50% - 10px);
+      margin: 5px;
+      display: inline-block;
+      vertical-align: top;
     }
     .category {
-      flex: 1 1 calc(50% - 10px);
       background: #009ca7;
       color: white;
       padding: 10px;
@@ -56,6 +55,7 @@
     }
     .resources-wrapper {
       display: none;
+      margin-top: 10px;
     }
     .resource {
       border: 1px solid #ccc;
@@ -118,9 +118,7 @@
     <h1>Advocate Resource Guide</h1>
   </header>
 
-  <div class="container" id="app">
-    <div class="category-grid" id="category-grid"></div>
-  </div>
+  <div class="container" id="app"></div>
   <a href="#" class="top-link" id="topLink">⬆ Back to Top</a>
 
   <script>
@@ -136,18 +134,20 @@
         });
 
         const app = document.getElementById("app");
-        const grid = document.getElementById("category-grid");
         const wrappers = [];
         let currentActive = null;
 
         const sortedCats = Object.keys(categories).sort();
         sortedCats.forEach(cat => {
+          const wrapperDiv = document.createElement("div");
+          wrapperDiv.className = "category-wrapper";
+
           const catDiv = document.createElement("div");
           catDiv.className = "category";
           catDiv.textContent = cat;
 
-          const wrapper = document.createElement("div");
-          wrapper.className = "resources-wrapper";
+          const resourceWrapper = document.createElement("div");
+          resourceWrapper.className = "resources-wrapper";
 
           const sortedResources = categories[cat].sort((a, b) =>
             a.Name.localeCompare(b.Name)
@@ -157,25 +157,27 @@
             const resDiv = document.createElement("div");
             resDiv.className = "resource";
             resDiv.innerHTML = generateCard(resource);
-            wrapper.appendChild(resDiv);
+            resourceWrapper.appendChild(resDiv);
           });
 
           catDiv.addEventListener("click", () => {
             document.querySelectorAll(".category").forEach(c => c.classList.remove("active"));
-            wrappers.forEach(w => (w.style.display = "none"));
-            if (currentActive === wrapper) {
-              wrapper.style.display = "none";
+            wrappers.forEach(w => w.style.display = "none");
+
+            if (currentActive === resourceWrapper) {
+              resourceWrapper.style.display = "none";
               currentActive = null;
             } else {
-              wrapper.style.display = "block";
+              resourceWrapper.style.display = "block";
               catDiv.classList.add("active");
-              currentActive = wrapper;
+              currentActive = resourceWrapper;
             }
           });
 
-          wrappers.push(wrapper);
-          grid.appendChild(catDiv);
-          app.appendChild(wrapper);
+          wrappers.push(resourceWrapper);
+          wrapperDiv.appendChild(catDiv);
+          wrapperDiv.appendChild(resourceWrapper);
+          app.appendChild(wrapperDiv);
         });
       });
 
