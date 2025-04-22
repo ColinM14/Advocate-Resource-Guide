@@ -2,147 +2,225 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Senior Resource Guide</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background: #f9f9f9;
-        }
-        header {
-            background: #000000;
-            color: white;
-            padding: 20px;
-            text-align: center;
-        }
-        header img {
-            width: 3in;
-            max-width: 100%;
-            display: block;
-            margin: 0 auto;
-        }
-        .container {
-            padding: 20px;
-        }
-        .category-grid {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-        }
-        .category {
-            background: #009ca7;
-            color: white;
-            padding: 10px;
-            border-radius: 5px;
-            cursor: pointer;
-            flex: 1 1 200px;
-            text-align: center;
-        }
-        .resources-wrapper {
-            display: none;
-        }
-        .resource {
-            border: 1px solid #ccc;
-            padding: 10px;
-            margin-top: 10px;
-            border-radius: 5px;
-            background: white;
-        }
-        .resource h4 {
-            margin: 5px 0;
-        }
-        .button-row {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            margin-top: 10px;
-        }
-        button.copy {
-            flex: 1 1 140px;
-            max-width: 3in;
-            background: #66b1e2;
-            color: white;
-            border: none;
-            padding: 10px;
-            border-radius: 4px;
-            cursor: pointer;
-            text-align: center;
-        }
-        button.copy:hover {
-            background: #009ca7;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <title>Senior Resource Guide</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #f9f9f9;
+    }
+    header {
+      background: #000;
+      color: white;
+      padding: 20px;
+      text-align: center;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+    header img {
+      width: 3in;
+      max-width: 100%;
+      display: block;
+      margin: 0 auto;
+    }
+    h1 {
+      margin-top: 10px;
+    }
+    .container {
+      padding: 20px;
+    }
+    .search-bar {
+      max-width: 500px;
+      margin: 0 auto 20px auto;
+      display: block;
+      width: 100%;
+      padding: 10px;
+      font-size: 16px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+    .carepatrol-section {
+      margin-bottom: 30px;
+    }
+    .section-label {
+      background: #715191;
+      color: white;
+      padding: 15px;
+      font-weight: bold;
+      font-size: 18px;
+      text-align: center;
+      border-radius: 5px;
+    }
+    .resource {
+      border: 1px solid #ccc;
+      padding: 10px;
+      margin-top: 10px;
+      border-radius: 5px;
+      background: white;
+    }
+    .category-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+    .category {
+      background: #009ca7;
+      color: white;
+      padding: 10px;
+      border-radius: 5px;
+      cursor: pointer;
+      flex: 1 1 200px;
+      text-align: center;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .resources-wrapper {
+      display: none;
+    }
+    .button-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 10px;
+    }
+    button.copy {
+      flex: 1 1 140px;
+      max-width: 3in;
+      background: #66b1e2;
+      color: white;
+      border: none;
+      padding: 10px;
+      border-radius: 4px;
+      cursor: pointer;
+      text-align: center;
+    }
+    button.copy:hover {
+      background: #009ca7;
+    }
+    .top-link {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: #919195;
+      color: white;
+      padding: 10px 15px;
+      border-radius: 50px;
+      font-size: 14px;
+      text-decoration: none;
+      display: none;
+    }
+  </style>
 </head>
 <body>
-    <header>
-        <img src="https://carepatrol.com/wp-content/uploads/sites/2/2023/07/CP_CarePatrol-Logo_CMYK.svg" alt="CarePatrol Logo">
-        <h1 style="margin-top: 10px;">Senior Resource Guide</h1>
-    </header>
-    <div class="container" id="app">
-        <p>Loading resources...</p>
+  <header>
+    <img src="https://carepatrol.com/wp-content/uploads/sites/2/2023/07/CP_CarePatrol-Logo_CMYK.svg" alt="CarePatrol Logo" />
+    <h1>Senior Resource Guide</h1>
+    <input type="text" id="search" class="search-bar" placeholder="Search by name, category, or keyword..." />
+  </header>
+
+  <div class="container" id="app">
+    <div class="carepatrol-section" id="carepatrol-section">
+      <div class="section-label">** CarePatrol Links **</div>
+      <div id="carepatrol-links"></div>
     </div>
-    <script>
-        const SHEET_URL = 'data.json';
+    <div class="category-grid" id="category-grid"></div>
+  </div>
 
-        fetch(SHEET_URL)
-            .then(response => response.json())
-            .then(data => {
-                const categories = {};
-                data.forEach(item => {
-                    if (!categories[item.Category]) categories[item.Category] = [];
-                    categories[item.Category].push(item);
-                });
+  <a href="#" class="top-link" id="topLink">⬆ Back to Top</a>
 
-                const app = document.getElementById('app');
-                app.innerHTML = '';
+  <script>
+    const SHEET_URL = 'data.json';
 
-                const categoryGrid = document.createElement('div');
-                categoryGrid.className = 'category-grid';
+    fetch(SHEET_URL)
+      .then((response) => response.json())
+      .then((data) => {
+        const categories = {};
+        data.forEach((item) => {
+          if (!categories[item.Category]) categories[item.Category] = [];
+          categories[item.Category].push(item);
+        });
 
-                Object.keys(categories).forEach(cat => {
-                    const catDiv = document.createElement('div');
-                    catDiv.className = 'category';
-                    catDiv.textContent = cat;
+        const app = document.getElementById("app");
+        const grid = document.getElementById("category-grid");
+        const carepatrol = document.getElementById("carepatrol-links");
 
-                    const wrapper = document.createElement('div');
-                    wrapper.className = 'resources-wrapper';
+        const wrappers = [];
 
-                    categories[cat].forEach(resource => {
-                        const resDiv = document.createElement('div');
-                        resDiv.className = 'resource';
-
-                        resDiv.innerHTML = `
-                            <h4>${resource.Name}</h4>
-                            <p><strong>Phone:</strong> ${resource.Phone}</p>
-                            <p><strong>Website:</strong> <a href='${resource.Website}' target='_blank'>${resource.Website}</a></p>
-                            <p><strong>Address:</strong> ${resource.Address}</p>
-                            <p>${resource.Description}</p>
-                            <div class="button-row">
-                                <button class='copy' onclick="copyText('${resource.Phone}')">Copy Phone</button>
-                                <button class='copy' onclick="copyText('${resource.Website}')">Copy Website</button>
-                            </div>
-                        `;
-                        wrapper.appendChild(resDiv);
-                    });
-
-                    catDiv.addEventListener('click', () => {
-                        wrapper.style.display = wrapper.style.display === 'block' ? 'none' : 'block';
-                    });
-
-                    categoryGrid.appendChild(catDiv);
-                    app.appendChild(categoryGrid);
-                    app.appendChild(wrapper);
-                });
+        const sortedCats = Object.keys(categories).sort();
+        sortedCats.forEach((cat) => {
+          if (cat === "CarePatrol Links") {
+            categories[cat].forEach((resource) => {
+              const div = document.createElement("div");
+              div.className = "resource";
+              div.innerHTML = generateCard(resource);
+              carepatrol.appendChild(div);
             });
+            return;
+          }
 
-        function copyText(text) {
-            navigator.clipboard.writeText(text).then(() => {
-                alert("Copied: " + text);
-            });
-        }
-    </script>
+          const catDiv = document.createElement("div");
+          catDiv.className = "category";
+          catDiv.innerHTML = `<span>▶ ${cat}</span>`;
+
+          const wrapper = document.createElement("div");
+          wrapper.className = "resources-wrapper";
+
+          categories[cat].forEach((resource) => {
+            const resDiv = document.createElement("div");
+            resDiv.className = "resource";
+            resDiv.innerHTML = generateCard(resource);
+            wrapper.appendChild(resDiv);
+          });
+
+          catDiv.addEventListener("click", () => {
+            wrappers.forEach((w) => (w.style.display = "none"));
+            wrapper.style.display = wrapper.style.display === "block" ? "none" : "block";
+          });
+
+          wrappers.push(wrapper);
+          grid.appendChild(catDiv);
+          app.appendChild(wrapper);
+        });
+
+        const searchInput = document.getElementById("search");
+        searchInput.addEventListener("input", (e) => {
+          const val = e.target.value.toLowerCase();
+          document.querySelectorAll(".resource").forEach((card) => {
+            card.style.display = card.textContent.toLowerCase().includes(val) ? "block" : "none";
+          });
+        });
+      });
+
+    function generateCard(resource) {
+      return `
+        <h4>${resource.Name}</h4>
+        <p><strong>Phone:</strong> ${resource.Phone}</p>
+        <p><strong>Website:</strong> <a href='${resource.Website}' target='_blank'>${resource.Website}</a></p>
+        <p><strong>Address:</strong> ${resource.Address}</p>
+        <p>${resource.Description}</p>
+        <div class="button-row">
+          <button class='copy' onclick="copyText('${resource.Phone}')">Copy Phone</button>
+          <button class='copy' onclick="copyText('${resource.Website}')">Copy Website</button>
+        </div>
+      `;
+    }
+
+    function copyText(text) {
+      navigator.clipboard.writeText(text).then(() => {
+        alert("Copied: " + text);
+      });
+    }
+
+    const topLink = document.getElementById("topLink");
+    window.addEventListener("scroll", () => {
+      topLink.style.display = window.scrollY > 300 ? "block" : "none";
+    });
+  </script>
 </body>
 </html>
