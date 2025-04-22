@@ -33,35 +33,6 @@
     .container {
       padding: 20px;
     }
-    .search-bar {
-      max-width: 500px;
-      margin: 0 auto 20px auto;
-      display: block;
-      width: 100%;
-      padding: 10px;
-      font-size: 16px;
-      border-radius: 5px;
-      border: 1px solid #ccc;
-    }
-    .carepatrol-section {
-      margin-bottom: 30px;
-    }
-    .section-label {
-      background: #715191;
-      color: white;
-      padding: 15px;
-      font-weight: bold;
-      font-size: 18px;
-      text-align: center;
-      border-radius: 5px;
-    }
-    .resource {
-      border: 1px solid #ccc;
-      padding: 10px;
-      margin-top: 10px;
-      border-radius: 5px;
-      background: white;
-    }
     .category-grid {
       display: flex;
       flex-wrap: wrap;
@@ -82,6 +53,16 @@
     }
     .resources-wrapper {
       display: none;
+    }
+    .resource {
+      border: 1px solid #ccc;
+      padding: 10px;
+      margin-top: 10px;
+      border-radius: 5px;
+      background: white;
+    }
+    .resource h4 {
+      margin: 5px 0;
     }
     .button-row {
       display: flex;
@@ -121,17 +102,9 @@
   <header>
     <img src="https://carepatrol.com/wp-content/uploads/sites/2/2023/07/CP_CarePatrol-Logo_CMYK.svg" alt="CarePatrol Logo" />
     <h1>Advocate Resource Guide</h1>
-    <input type="text" id="search" class="search-bar" placeholder="Search by name, category, or keyword..." />
   </header>
 
-  <div class="container" id="app">
-    <div class="carepatrol-section" id="carepatrol-section">
-      <div class="section-label">** CarePatrol Links **</div>
-      <div id="carepatrol-links"></div>
-    </div>
-    <div class="category-grid" id="category-grid"></div>
-  </div>
-
+  <div class="container" id="app"></div>
   <a href="#" class="top-link" id="topLink">⬆ Back to Top</a>
 
   <script>
@@ -147,26 +120,13 @@
         });
 
         const app = document.getElementById("app");
-        const grid = document.getElementById("category-grid");
-        const carepatrol = document.getElementById("carepatrol-links");
-
         const wrappers = [];
-
         const sortedCats = Object.keys(categories).sort();
-        sortedCats.forEach((cat) => {
-          if (cat === "CarePatrol Links") {
-            categories[cat].forEach((resource) => {
-              const div = document.createElement("div");
-              div.className = "resource";
-              div.innerHTML = generateCard(resource);
-              carepatrol.appendChild(div);
-            });
-            return;
-          }
 
+        sortedCats.forEach((cat) => {
           const catDiv = document.createElement("div");
           catDiv.className = "category";
-          catDiv.innerHTML = `<span>▶ ${cat}</span>`;
+          catDiv.textContent = cat;
 
           const wrapper = document.createElement("div");
           wrapper.className = "resources-wrapper";
@@ -184,29 +144,26 @@
           });
 
           wrappers.push(wrapper);
-          grid.appendChild(catDiv);
+          app.appendChild(catDiv);
           app.appendChild(wrapper);
-        });
-
-        const searchInput = document.getElementById("search");
-        searchInput.addEventListener("input", (e) => {
-          const val = e.target.value.toLowerCase();
-          document.querySelectorAll(".resource").forEach((card) => {
-            card.style.display = card.textContent.toLowerCase().includes(val) ? "block" : "none";
-          });
         });
       });
 
     function generateCard(resource) {
+      const phone = resource.Phone === "null" ? "" : resource.Phone;
+      const website = resource.Website === "null" ? "" : resource.Website;
+      const address = resource.Address === "null" ? "" : resource.Address;
+      const description = resource.Description === "null" ? "" : resource.Description;
+
       return `
         <h4>${resource.Name}</h4>
-        <p><strong>Phone:</strong> ${resource.Phone}</p>
-        <p><strong>Website:</strong> <a href='${resource.Website}' target='_blank'>${resource.Website}</a></p>
-        <p><strong>Address:</strong> ${resource.Address}</p>
-        <p>${resource.Description}</p>
+        <p><strong>Phone:</strong> ${phone}</p>
+        <p><strong>Website:</strong> <a href='${website}' target='_blank'>${website}</a></p>
+        <p><strong>Address:</strong> ${address}</p>
+        <p>${description}</p>
         <div class="button-row">
-          <button class='copy' onclick="copyText('${resource.Phone}')">Copy Phone</button>
-          <button class='copy' onclick="copyText('${resource.Website}')">Copy Website</button>
+          ${phone ? `<button class='copy' onclick="copyText('${phone}')">Copy Phone</button>` : ""}
+          ${website ? `<button class='copy' onclick="copyText('${website}')">Copy Website</button>` : ""}
         </div>
       `;
     }
