@@ -33,25 +33,23 @@
     .container {
       padding: 20px;
     }
-    .category-grid {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-bottom: 20px;
-    }
-    .category {
-      background: #009ca7;
-      color: white;
-      padding: 10px;
-      border-radius: 5px;
-      cursor: pointer;
-      flex: 1 1 200px;
-      text-align: center;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      transition: background 0.3s;
-    }
+.category-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.category {
+  flex: 1 1 calc(50% - 10px);
+  background: #009ca7;
+  color: white;
+  padding: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  text-align: center;
+  box-sizing: border-box;
+}
+
     .category.active {
       background: #66b1e2;
       font-weight: bold;
@@ -120,7 +118,7 @@
     <h1>Advocate Resource Guide</h1>
   </header>
 
-  <div class="container" id="app"></div>
+<div class="category-grid" id="category-grid"></div>
   <a href="#" class="top-link" id="topLink">⬆ Back to Top</a>
 
   <script>
