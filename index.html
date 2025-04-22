@@ -33,23 +33,23 @@
     .container {
       padding: 20px;
     }
-.category-grid {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-}
-
-.category {
-  flex: 1 1 calc(50% - 10px);
-  background: #009ca7;
-  color: white;
-  padding: 10px;
-  border-radius: 5px;
-  cursor: pointer;
-  text-align: center;
-  box-sizing: border-box;
-}
-
+    .category-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+    .category {
+      flex: 1 1 calc(50% - 10px);
+      background: #009ca7;
+      color: white;
+      padding: 10px;
+      border-radius: 5px;
+      cursor: pointer;
+      text-align: center;
+      box-sizing: border-box;
+      transition: background 0.3s;
+    }
     .category.active {
       background: #66b1e2;
       font-weight: bold;
@@ -118,17 +118,16 @@
     <h1>Advocate Resource Guide</h1>
   </header>
 
-<div class="category-grid" id="category-grid"></div>
+  <div class="container" id="app">
+    <div class="category-grid" id="category-grid"></div>
+  </div>
   <a href="#" class="top-link" id="topLink">⬆ Back to Top</a>
 
   <script>
     const SHEET_URL = 'data.json';
 
     fetch(SHEET_URL)
-      .then(response => {
-        if (!response.ok) throw new Error("Data not loaded");
-        return response.json();
-      })
+      .then(response => response.json())
       .then(data => {
         const categories = {};
         data.forEach(item => {
@@ -137,11 +136,11 @@
         });
 
         const app = document.getElementById("app");
+        const grid = document.getElementById("category-grid");
         const wrappers = [];
         let currentActive = null;
 
         const sortedCats = Object.keys(categories).sort();
-
         sortedCats.forEach(cat => {
           const catDiv = document.createElement("div");
           catDiv.className = "category";
@@ -162,8 +161,8 @@
           });
 
           catDiv.addEventListener("click", () => {
-            wrappers.forEach(w => (w.style.display = "none"));
             document.querySelectorAll(".category").forEach(c => c.classList.remove("active"));
+            wrappers.forEach(w => (w.style.display = "none"));
             if (currentActive === wrapper) {
               wrapper.style.display = "none";
               currentActive = null;
@@ -175,12 +174,9 @@
           });
 
           wrappers.push(wrapper);
-          app.appendChild(catDiv);
+          grid.appendChild(catDiv);
           app.appendChild(wrapper);
         });
-      })
-      .catch(err => {
-        document.getElementById("app").innerHTML = "<p style='color:red;'>Failed to load data. Please check your connection or data.json file.</p>";
       });
 
     function generateCard(resource) {
