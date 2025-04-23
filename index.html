@@ -266,7 +266,7 @@ function generateCard(resource) {
         ${description ? `<span class="desc">${description}</span>` : ""}
       </div>
       <div class="button-row">
-        ${phone ? `<button class="copy-button" onclick="copyText('${phone}')">Copy Phone</button>` : ""}
+        <button class="copy-button" onclick="copyText('${resource.Name}: ${phone}')">Copy Phone</button>
         ${website ? `<button class="copy-button" onclick="copyText('${website}')">Copy Website</button>` : ""}
       </div>
     </div>
