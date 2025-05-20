@@ -112,7 +112,7 @@
     "Address": "Colorado Springs, CO"
   },
   {
-    "Category": null,
+    "Category": "Downsizing & Organizing",
     "Name": "All Things Senior Transitions",
     "Website": "https://atstransitions.com/",
     "Phone": "719-431-4302",
@@ -120,7 +120,7 @@
     "Address": "Colorado Springs, CO"
   },
   {
-    "Category": null,
+    "Category": "Home Modifications",
     "Name": "HomeStretch",
     "Website": "https://www.home-stretch.com/locations/co/cos/",
     "Phone": " 719-900-8257",
@@ -128,7 +128,7 @@
     "Address": "Colorado Springs, CO"
   },
   {
-    "Category": null,
+    "Category": "Downsizing & Organizing",
     "Name": "Gale Force Organizers",
     "Website": "www.galeforceorganizers.com",
     "Phone": "(719) 653-5610",
@@ -472,7 +472,7 @@
     "Address": "3320 N Academy Blvd, COS"
   },
   {
-    "Category": "CarePatrol Links",
+    "Category": "**CarePatrol Links**",
     "Name": "Caregiver Calendar",
     "Website": "https://lp.constantcontactpages.com/sl/FLRqGEs/caregiverresourcecalendar",
     "Phone": null,
@@ -480,7 +480,7 @@
     "Address": null
   },
   {
-    "Category": "CarePatrol Links",
+    "Category": "**CarePatrol Links**",
     "Name": "May Event",
     "Website": "https://lp.constantcontactpages.com/sl/UjSEmY8/Gettingoldchangesus",
     "Phone": null,
@@ -488,31 +488,31 @@
     "Address": null
   },
   {
-    "Category": "CarePatrol Links",
+    "Category": "**CarePatrol Links**",
     "Name": "June Event 6/12",
     "Website": "https://lp.constantcontactpages.com/sl/bG1FLSE/UnderstandingAlzheimers",
     "Phone": null,
-    "Description": null,
+    "Description": "Understanding Alzheimer's and Dementia",
     "Address": null
   },
   {
-    "Category": "CarePatrol Links",
+    "Category": "**CarePatrol Links**",
     "Name": "June Event 6/24 AM",
     "Website": "https://lp.constantcontactpages.com/sl/EkUMREm/HealthyLiving",
     "Phone": null,
-    "Description": null,
+    "Description": "Healthy Living for Mind and body",
     "Address": null
   },
   {
-    "Category": "CarePatrol Links",
+    "Category": "**CarePatrol Links**",
     "Name": "June Event 6/24 PM",
     "Website": "https://lp.constantcontactpages.com/sl/h8lgvx1/VoicesofGrief",
     "Phone": null,
-    "Description": null,
+    "Description": "Voices of Grief Documentary and Group Conversation",
     "Address": null
   },
   {
-    "Category": "CarePatrol Links",
+    "Category": "**CarePatrol Links**",
     "Name": "Events Page",
     "Website": "https://carepatrol.com/colorado-springs-pueblo/events/",
     "Phone": null,
@@ -520,7 +520,7 @@
     "Address": null
   },
   {
-    "Category": "CarePatrol Links",
+    "Category": "**CarePatrol Links**",
     "Name": "Senior Resource Guide",
     "Website": "https://linktr.ee/carepatrol_seniorguide",
     "Phone": null,
@@ -528,7 +528,7 @@
     "Address": null
   },
   {
-    "Category": "CarePatrol Links",
+    "Category": "**CarePatrol Links**",
     "Name": "Golf Tournament",
     "Website": "https://carepatrol.com/colorado-springs-pueblo/events/5th-annual-end-alzheimers-golf-tournament-brought-to-you-by-carepatrol-of-colorado-springs-pueblo/",
     "Phone": null,
