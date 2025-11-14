@@ -282,8 +282,8 @@
   {
     "Category": "Home Care",
     "Name": "Comfort Keepers",
-    "Website": "https://www.gentleshepherdhomecare.com/",
-    "Phone": "(719)359-8371",
+    "Website": "https://www.comfortkeepers.com/offices/colorado/colorado-springs/",
+    "Phone": "(719) 522-9100",
     "Description": "In home care, respite, specialized home suppoort, recovery care, companion sitters, elder care management",
     "Address": null
   },
@@ -309,6 +309,14 @@
     "Website": "https://www.homeinstead.com/home-care/usa/co/colorado-springs/111/?utm_source=google&utm_medium=organic&utm_campaign=google_organic_businesslisting_y",
     "Phone": "(719)-204-6356",
     "Description": null,
+    "Address": null
+  },
+  {
+    "Category": "Home Care",
+    "Name": "Synergy Home Care",
+    "Website": "https://synergyhomecare.com/co-colorado-springs-80903/",
+    "Phone": "​​(719) 203-5848",
+    "Description": "In home care serving El Paso and Teller Counties. From personal assistance with bathing and dressing, to companion care to fight isolation and loneliness, to support with housekeeping, errand and transportation services, sometimes just a little extra help can make all the difference.",
     "Address": null
   },
   {
@@ -433,11 +441,19 @@
   },
   {
     "Category": "Mobile Wound Services",
-    "Name": "Compassionate Concierge Physicians",
+    "Name": "Maher Wound Care",
     "Website": "https://www.compassionateconciergephysicians.com/",
-    "Phone": "(720) 231-0721",
-    "Description": "Mobile wound care and in-home medical services.",
-    "Address": "Colorado-based"
+    "Phone": "(719) 471-0727",
+    "Description": "Maher Rehab provides expert wound care with individualized plans, using advanced techniques like amnio grafts, and thorough assessments.",
+    "Address": "1880 Office Club Pointe Suite 100, Colorado Springs, CO 80920"
+  },
+    {
+    "Category": "Mobile Wound Services",
+    "Name": "Mend Wound Care",
+    "Website": "https://www.mendmywound.com/",
+    "Phone": "719-922-1002",
+    "Description": "Mend Wound Care offers a range of services, from wound dressings and debridement to compression therapy and bio-engineered skin substitutes.",
+    "Address": "7610 N Union Blvd, Ste 150, Colorado Springs, CO 80920"
   },
   {
     "Category": "Mobile Wound Services",
