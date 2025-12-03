@@ -81,18 +81,26 @@
   },
   {
     "Category": "**CarePatrol Links**",
-    "Name": "Events Page",
-    "Website": "https://carepatrol.com/colorado-springs-pueblo/events/",
+    "Name": "CMS website for GUIDE",
+    "Website": "https://www.cms.gov/priorities/innovation/innovation-models/guide",
     "Phone": null,
-    "Description": null,
+    "Description": "Visit the CMS.gov page providing an overview of the GUIDE program and other resources",
     "Address": null
   },
   {
     "Category": "**CarePatrol Links**",
-    "Name": "October Event 10/29",
-    "Website": "https://carepatrol.com/colorado-springs-pueblo/events/how-are-you-going-to-pay-for-that/",
+    "Name": "CarePatrol Colorado Springs GUIDE landing page",
+    "Website": "https://carepatrol.com/colorado-springs-pueblo/lp/free-dementia-caregiver-resources-in-colorado-springs-pueblo-guide-program/",
     "Phone": null,
-    "Description": "How are you going to pay for that? Beneficent led session on how to pay for long term care",
+    "Description": "Visit our landing page where you can find basic information on GUIDE and access our eBook for a more in-depth overview.",
+    "Address": null
+  },
+  {
+    "Category": "**CarePatrol Links**",
+    "Name": "CarePatrol Colorado Springs GUIDE eBook",
+    "Website": "https://drive.google.com/file/d/1TUCpBvuNRIgW9JD9AoItxK9gVSGqwFIl/view?usp=sharing",
+    "Phone": null,
+    "Description": "Download our eBook that provides a GUIDE overview, FAQs, and answers many eligibility questions.",
     "Address": null
   },
   {
